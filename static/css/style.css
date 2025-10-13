@@ -1,0 +1,80 @@
+/* ===== base ===== */
+:root{
+  --bg1:#0b1220; --bg2:#0f1a2b; --accent:#00a3ff; --muted:#9fb6c9; --card:#0f1720;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:#dceefc}
+
+#token{
+  color:#0063d1
+}
+
+/* container */
+.container{width:92%;max-width:1100px;margin:0 auto;padding:18px}
+
+/* header */
+.site-header{background:linear-gradient(90deg,rgba(2,6,23,0.55),rgba(6,8,18,0.6));backdrop-filter:blur(6px);position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,0.03)}
+.navbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand .logo, .logo{font-weight:800;color:#fff;text-decoration:none;font-size:1.15rem}
+.logo .dot{color:var(--accent);margin-left:6px}
+
+/* nav links */
+.nav-links{display:flex;gap:16px;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;transition:all .18s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.04);transform:translateY(-2px)}
+.nav-toggle{display:none;background:transparent;border:0;color:var(--muted);font-size:1.2rem;padding:6px}
+
+/* hero */
+.site-main{padding:28px 0 60px}
+.hero{display:flex;gap:28px;align-items:center;justify-content:space-between}
+.hero-card{flex:1;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));padding:28px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+.hero-title{font-size:2.1rem;color:#fff;margin-bottom:10px}
+.hero-lead{color:var(--muted);margin-bottom:16px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#0063d1);color:#fff;box-shadow:0 10px 30px rgba(0,163,255,0.12);transition:transform .18s}
+.btn.primary:hover{transform:translateY(-4px)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+/* quick hints list */
+.quick-hints{margin-top:14px;list-style:disc;margin-left:18px;color:#bcd6e8}
+.quick-hints li{margin:6px 0;}
+
+/* hero image */
+.hero-image{flex:0 0 420px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.hero-image img{width:100%;max-width:420px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.6);transition:transform .5s}
+.hero-image img:hover{transform:scale(1.03)}
+.hero-image figcaption{color:var(--muted);font-size:0.9rem}
+
+/* howto grid */
+.howto{margin-top:28px}
+.howto-grid{display:grid;grid-template-columns:repeat(4,1fr) 320px;gap:18px;align-items:stretch}
+.howto-item{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+.badge{width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#0063d1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;margin-bottom:12px}
+.howto-item h3{margin-bottom:8px;color:#fff}
+.howto-item p{color:var(--muted);line-height:1.35}
+
+/* howto cta */
+.howto-cta{background:linear-gradient(180deg,#061223,rgba(255,255,255,0.02));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+.howto-cta h3{color:#fff;margin-bottom:8px}
+.howto-cta p{color:var(--muted);margin-bottom:12px}
+.howto-cta .hint-toggle{background:#ffb86b;border:0;padding:10px 12px;border-radius:8px;font-weight:700;cursor:pointer}
+.hint-text{display:none;color:#d7f3ff;margin-top:10px}
+
+/* about */
+.about{margin-top:22px;padding:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+.about h3{color:#fff;margin-bottom:8px}
+.about p{color:var(--muted)}
+
+/* footer */
+.site-footer{padding:18px 0;margin-top:30px;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,0.02)}
+
+/* small screens */
+@media (max-width:980px){
+  .hero{flex-direction:column-reverse}
+  .howto-grid{grid-template-columns:1fr;grid-auto-rows:auto}
+  .nav-links{display:none;flex-direction:column;background:linear-gradient(180deg,rgba(0,0,0,0.4),rgba(0,0,0,0.2));position:absolute;right:18px;top:64px;padding:10px;border-radius:8px}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:inline-block}
+  .nav-links a{padding:8px}
+}

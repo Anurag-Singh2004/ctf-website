@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CES CTF — Profile</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>CES CTF Challenge — Profile</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/search?q=test">Search</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="profile-section">
+      <h2>Your Profile</h2>
+      <div id="info">
+      </div>
+    </section>
+  </main>
+  <br><br><br>
+
+  <footer>
+    <p>&copy; CES CTF 2025</p>
+  </footer>
+
+  <script>
+    
+    function getCookie(name) {
+      let match = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+      return match ? decodeURIComponent(match[2]) : null;
+    }
+    const role = getCookie('role');
+    if(role === 'admin') {
+      const info = document.getElementById('info');
+      info.innerHTML += "<br><strong>cGpkeHl0c2o=</strong> <br>cipher5";
+    }
+  </script>
+</body>
+</html>

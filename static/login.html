@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CES CTF — Login</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>CES CTF Challenge — Login</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/search?q=test">Search</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="login-section">
+      <h2>Login to your account</h2>
+      <form method="GET" action="/login" class="login-form">
+        <label>Username:
+          <input type="text" name="user" placeholder="Enter username" required>
+        </label>
+        <label>Password:
+          <input type="password" name="pass" placeholder="Enter password" required>
+        </label>
+        <button type="submit">Login</button>
+      </form>
+    </section>
+  </main>
+  <br>
+  <footer>
+    <p>&copy; CES CTF 2025</p>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

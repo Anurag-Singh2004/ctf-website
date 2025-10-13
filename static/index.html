@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CES CTF — The Lost Tokens</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+  
+  <header class="site-header">
+    <div class="navbar container">
+      <div class="brand">
+        <a href="/" class="logo">CES <span class="dot">CTF</span></a>
+      </div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/profile">Profile</a>
+        <a href="/search?q=test">Search</a>
+      </nav>
+
+      <button id="navToggle" class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <section class="hero container">
+      <div class="hero-card">
+        <h1 class="hero-title">Welcome, Explorer</h1>
+        <p class="hero-lead">
+          A quiet site. Five hidden tokens. One final passphrase.  
+          Your job: discover, decode, chain.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn primary" href="/login">Begin Hunt</a>
+          <a class="btn ghost" href="/search?q=test">Try Search</a>
+        </div>
+
+        <ul class="quick-hints">
+          <li>The truth whispers not in what you see, but in what the code remembers.</li>
+          <li>Pixels may carry more than color; some remember what was once erased.</li>
+          <li>If the gatekeeper asks your name, try a lie and watch his reaction.</li>
+        </ul>
+      </div>
+
+      <figure class="hero-image">
+        <!-- NmM3NDY5NmM3OQ== -->
+        <img src="/static/images/ctf_image_plain.png" alt="Campus photo">  
+        <figcaption>Look beyond pixels — silence stores stories.</figcaption>
+      </figure>
+    </section>
+
+    <section class="howto container">
+      <div class="howto-grid">
+        <div class="howto-item">
+          <div class="badge">1</div>
+          <h3>Listen</h3>
+          <p>Read the margins where code keeps its quiet notes.</p>
+        </div>
+
+        <div class="howto-item">
+          <div class="badge">2</div>
+          <h3>Ask</h3>
+          <p>Pose small, unusual questions to the site and compare its replies — echoes often carry answers.</p>
+        </div>
+
+        <div class="howto-item">
+          <div class="badge">3</div>
+          <h3>Decode</h3>
+          <p>Some strings are wearing disguises.</p>
+        </div>
+
+        <div class="howto-item">
+          <div class="badge">4</div>
+          <h3>Forge</h3>
+          <p>Find a different face of the page.</p>
+        </div>
+
+        <div class="howto-cta">
+          <h3>Assemble</h3>
+          <p>Order the pieces in the tale’s flow (entry → murmur → sealed message → reverberation → vault). Join with underscores: <code>flagCES{...}</code></p>
+          <button class="hint-toggle" id="hintBtn">Reveal cryptic nudge</button>
+          <!-- subtract 7 from each letter to get original letters -->
+          <p id="hint" class="hint-text">If progress stalls, don’t knock harder — read the author’s scratches and the file’s whispers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about container">
+      <h3>About this challenge</h3>
+      <p>This challenge covers basic web exploitation techniques. It rewards careful observation and chaining of clues.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© CES CTF 2025 — Play fair, learn lots.</small>
+    </div>
+  </footer>
+
+  <script>
+
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+
+
+    const hintBtn = document.getElementById('hintBtn');
+    const hint = document.getElementById('hint');
+    hintBtn && hintBtn.addEventListener('click', ()=> {
+      hint.style.display = hint.style.display === 'block' ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>
