@@ -5,8 +5,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT||5000;
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 // static serve
-app.use('/static', express.static(path.join(__dirname,'..','static')));
+app.use(express.static(path.join(__dirname,'..','static')));
 
 // connect to MySQL
 const db = mysql.createConnection({
@@ -55,7 +58,7 @@ app.get('/profile', (req,res)=>{
   const role = (req.headers.cookie || '').split(';').map(s=>s.trim()).find(s=>s.startsWith('role='));
   const roleVal = role ? role.split('=')[1] : '';
   if(roleVal==='admin'){
-    res.sendFile(path.join(__dirname,'static','profile.html'));
+    res.sendFile(path.join(__dirname,'..','static','profile.html'));
   } else {
     res.sendFile(path.join(__dirname,'..','static','profile.html'));
   }
