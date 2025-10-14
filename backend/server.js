@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT||5000;
 
 // static serve
-app.use('/static', express.static(path.join(__dirname, 'static')));
+app.use('/static', express.static(path.join(__dirname,'..','static')));
 
 // connect to MySQL
 const db = mysql.createConnection({
@@ -20,13 +20,13 @@ const db = mysql.createConnection({
 db.connect(err=>{ if(err) console.error('DB conn error',err); else console.log('Connected to MySQL'); });
 
 // Home
-app.get('/', (req,res)=> res.sendFile(path.join(__dirname,'static','index.html')));
+app.get('/', (req,res)=> res.sendFile(path.join(__dirname,'..','static','index.html')));
 
 // Serve login page (GET)
 app.get('/login', (req,res)=>{
   const user = req.query.user||'';
   const pass = req.query.pass||'';
-  if(!user && !pass) return res.sendFile(path.join(__dirname,'static','login.html'));
+  if(!user && !pass) return res.sendFile(path.join(__dirname,'..','static','login.html'));
   // vulnerable SQL - intentional
   const sql = `SELECT * FROM users WHERE username='${user}' AND password='${pass}' LIMIT 1`;
   db.query(sql, (err, results)=>{
@@ -57,7 +57,7 @@ app.get('/profile', (req,res)=>{
   if(roleVal==='admin'){
     res.sendFile(path.join(__dirname,'static','profile.html'));
   } else {
-    res.sendFile(path.join(__dirname,'static','profile.html'));
+    res.sendFile(path.join(__dirname,'..','static','profile.html'));
   }
 });
 
