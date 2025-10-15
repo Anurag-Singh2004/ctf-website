@@ -13,11 +13,14 @@ app.use(express.static(path.join(__dirname,'..','static')));
 
 // connect to MySQL
 const db = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'ctfuser',
-  password: process.env.DB_PASS || 'ctfpass',
-  database: process.env.DB_NAME || 'ctfdbs',
-  multipleStatements: true
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "ctfuser",
+  password: process.env.DB_PASS || "ctfpass",
+  database: process.env.DB_NAME || "ctfdbs",
+  multipleStatements: true,
+  ssl: {
+    rejectUnauthorized: true, //  Required for Aiven
+  }
 });
 
 db.connect(err=>{ if(err) console.error('DB conn error',err); else console.log('Connected to MySQL'); });
