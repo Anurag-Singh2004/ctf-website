@@ -21,7 +21,7 @@ const db = mysql.createConnection({
   connectTimeout: 60000, // 60 seconds timeout
   multipleStatements: true,
   ssl: {
-    rejectUnauthorized: true, // Required for Aiven
+    rejectUnauthorized: false, // Required for Aiven
   },
 });
 
@@ -81,4 +81,4 @@ app.get('/profile', (req,res)=>{
   }
 });
 
-app.listen(PORT, ()=> console.log('Server running on '+PORT));
+app.listen(PORT, '0.0.0.0', ()=> console.log('Server running on '+PORT));
