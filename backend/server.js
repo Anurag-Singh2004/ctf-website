@@ -14,16 +14,30 @@ app.use(express.static(path.join(__dirname,'..','static')));
 // connect to MySQL
 const db = mysql.createConnection({
   host: process.env.DB_HOST || "localhost",
+  port: process.env.DB_PORT || 25060, // Aiven typically uses 25060, not 3306
   user: process.env.DB_USER || "ctfuser",
   password: process.env.DB_PASS || "ctfpass",
   database: process.env.DB_NAME || "ctfdbs",
+  connectTimeout: 60000, // 60 seconds timeout
   multipleStatements: true,
   ssl: {
-    rejectUnauthorized: true, //  Required for Aiven
-  }
+    rejectUnauthorized: true, // Required for Aiven
+  },
 });
 
-db.connect(err=>{ if(err) console.error('DB conn error',err); else console.log('Connected to MySQL'); });
+db.connect((err) => {
+  if (err) {
+    console.error("DB conn error", err);
+    console.error("Connection details:", {
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT || 25060,
+      user: process.env.DB_USER,
+      database: process.env.DB_NAME,
+    });
+  } else {
+    console.log("Connected to MySQL");
+  }
+});
 
 // Home
 app.get('/', (req,res)=> res.sendFile(path.join(__dirname,'..','static','index.html')));
