@@ -48,7 +48,10 @@ db.connect((err) => {
   }
 });
 
-
+// Home route - redirect to Vercel main site
+app.get('/',(req,res)=>{
+  res.redirect(VERCEL_URL);
+});
 
 // Serve login page (GET)
 app.get('/login', (req,res)=>{
