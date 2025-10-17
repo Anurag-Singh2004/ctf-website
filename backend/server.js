@@ -2,14 +2,23 @@ const express = require('express');
 const mysql = require('mysql2');
 const path = require('path');
 require('dotenv').config();
+const cors = require('cors');
+
+
 const app = express();
 const PORT = process.env.PORT||5000;
 
+const VERCEL_URL = "https://ctf-website-ten.vercel.app/";
+
+app.use(
+  cors({
+    origin: VERCEL_URL,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-// static serve
-app.use(express.static(path.join(__dirname,'..','static')));
+
 
 // connect to MySQL
 const db = mysql.createConnection({
@@ -22,7 +31,7 @@ const db = mysql.createConnection({
   multipleStatements: true,
   ssl: {
     rejectUnauthorized: false, // Required for Aiven
-  },
+  }
 });
 
 db.connect((err) => {
@@ -39,22 +48,35 @@ db.connect((err) => {
   }
 });
 
-// Home
-app.get('/', (req,res)=> res.sendFile(path.join(__dirname,'..','static','index.html')));
+
 
 // Serve login page (GET)
 app.get('/login', (req,res)=>{
   const user = req.query.user||'';
   const pass = req.query.pass||'';
-  if(!user && !pass) return res.sendFile(path.join(__dirname,'..','static','login.html'));
+  if(!user && !pass) return res.redirect(`${VERCEL_URL}/login.html`);
+
+
   // vulnerable SQL - intentional
   const sql = `SELECT * FROM users WHERE username='${user}' AND password='${pass}' LIMIT 1`;
   db.query(sql, (err, results)=>{
-    if(err) return res.send('Error occurred');
+    if(err) return res.send(`
+      <html>
+        <body>
+          <p>Error occurred </p>
+          <a href = "${VERCEL_URL}/login.html">Back to login</a>
+        </body>
+      </html>
+    `);
+
     if(results && results.length>0){
-      res.send('<p>Welcome '+results[0].username+'</p><p>Try <a href="/profile">profile</a></p>');
+      res.send(`
+         <p>Welcome ${results[0].username}</p>
+         <p>Try <a href="${VERCEL_URL}/profile.html">profile</a></p>'
+      `);
     } else {
-      res.send('<p>Invalid login. Try again.</p><p>Hint: test injection at /search</p>');
+      res.send(`<p>Invalid login. Try again.</p><p>Hint: test injection at /search</p>
+      <a href="${VERCEL_URL}/login.html">Back to login</a>`);
     }
   });
 });
@@ -71,6 +93,8 @@ app.get('/search', (req,res)=>{
 });
 
 // profile - shows keystone if cookie 'role' is 'admin'
+
+//check that the same work is also done by profile javascript code then why this
 app.get('/profile', (req,res)=>{
   const role = (req.headers.cookie || '').split(';').map(s=>s.trim()).find(s=>s.startsWith('role='));
   const roleVal = role ? role.split('=')[1] : '';
