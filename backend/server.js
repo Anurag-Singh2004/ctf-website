@@ -78,7 +78,7 @@ app.get('/login', (req,res)=>{
          <p>Try <a href="${VERCEL_URL}/profile.html">profile</a></p>'
       `);
     } else {
-      res.send(`<p>Invalid login. Try again.</p><p>Hint: test injection at /search</p>
+      res.send(`<p>Invalid login. Try again.</p><p>The truth whispers not in what you see, but in what the code remembers.</p>
       <a href="${VERCEL_URL}/login.html">Back to login</a>`);
     }
   });
@@ -87,7 +87,7 @@ app.get('/login', (req,res)=>{
 // vulnerable search endpoint - shows DB rows (intentionally vulnerable to UNION)
 app.get('/search', (req,res)=>{
   const q = req.query.q || '';
-  const sql = `SELECT id, message, token FROM tokens WHERE message='${q}'`;
+  const sql = `SELECT id, message, token FROM tokens WHERE id='${q}'`;
   db.query(sql, (err, results)=>{
     if(err) return res.send('Error occurred: '+err.message);
     if(results.length===0) return res.send('No results for '+q);
