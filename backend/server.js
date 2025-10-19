@@ -97,10 +97,9 @@ app.get('/search', (req,res)=>{
       <body>
         <h1>Search Endpoint</h1>
         <p>This endpoint searches for tokens by ID.</p>
-        <p><b>Usage:</b> <code>/search?q=&lt;id&gt;</code></p>
+        <p><b>Usage:</b> <code>/search?q=id</code></p>
         <hr>
-        <p><b>Hint:</b> Try searching for ID <code>1</code> to start.</p>
-        <p>Example: <code>/search?q=1</code></p>
+        <p><b>Hint:</b>Seek the origin, where every number bows — the lone stands as one.</p>
       </body>
       </html>
     `);
@@ -113,17 +112,5 @@ app.get('/search', (req,res)=>{
   });
 });
 
-// profile - shows keystone if cookie 'role' is 'admin'
-
-//check that the same work is also done by profile javascript code then why this
-app.get('/profile', (req,res)=>{
-  const role = (req.headers.cookie || '').split(';').map(s=>s.trim()).find(s=>s.startsWith('role='));
-  const roleVal = role ? role.split('=')[1] : '';
-  if(roleVal==='admin'){
-    res.sendFile(path.join(__dirname,'..','static','profile.html'));
-  } else {
-    res.sendFile(path.join(__dirname,'..','static','profile.html'));
-  }
-});
 
 app.listen(PORT, '0.0.0.0', ()=> console.log('Server running on '+PORT));
