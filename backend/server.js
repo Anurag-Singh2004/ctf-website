@@ -86,7 +86,25 @@ app.get('/login', (req,res)=>{
 
 // vulnerable search endpoint - shows DB rows (intentionally vulnerable to UNION)
 app.get('/search', (req,res)=>{
-  const q = req.query.q || '';
+  const q = req.query.q;
+  if (!q) {
+    return res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Search</title>
+      </head>
+      <body>
+        <h1>Search Endpoint</h1>
+        <p>This endpoint searches for tokens by ID.</p>
+        <p><b>Usage:</b> <code>/search?q=&lt;id&gt;</code></p>
+        <hr>
+        <p><b>Hint:</b> Try searching for ID <code>1</code> to start.</p>
+        <p>Example: <code>/search?q=1</code></p>
+      </body>
+      </html>
+    `);
+  }
   const sql = `SELECT id, message, token FROM tokens WHERE id='${q}'`;
   db.query(sql, (err, results)=>{
     if(err) return res.send('Error occurred: '+err.message);
