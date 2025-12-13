@@ -97,9 +97,9 @@ app.get('/search', (req,res)=>{
       <body>
         <h1>Search Endpoint</h1>
         <p>This endpoint searches for tokens by ID.</p>
-        <p><b>Usage:</b> <code>/search?q=id</code></p>
+        
         <hr>
-        <p><b>Hint:</b>Seek the origin, where every number bows — the lone stands as one.</p>
+        <p><b>Hint:</b>Seek the origin, where every number bows — the lone stands as <h5>one</h5>.</p>
       </body>
       </html>
     `);
